@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:metadata>
+        <f:viewParam name="student" value="#{studentEdit.student}" >
+            <f:converter converterId="myConverter"/>
+        </f:viewParam>
+        <f:event listener="#{studentEdit.preRenderView()}" type="preRenderView"/>
+    </f:metadata>
+    <h:head>
+        <title>Student list</title>
+    </h:head>
+
+    <h:body>
+
+        <h:messages />
+
+        <h:form enctype="multipart/form-data">
+
+            <h:panelGrid columns="2">
+                <f:facet name="header">Students</f:facet>
+
+                <h:outputLabel value="Id" rendered="#{!empty studentEdit.student.id}" />
+                <h:outputLabel value="#{studentEdit.student.id}" rendered="#{!empty studentEdit.student.id}" />
+
+                <h:outputLabel for="course" value="Course" />
+                <h:inputText id="course" value="#{studentEdit.student.course}" label="Course" />
+
+                <h:outputLabel for="email" value="Email" />
+                <h:inputText id="email" value="#{studentEdit.student.email}" label="Email"  />
+
+                <h:outputLabel for="name" value="Name" />
+                <h:inputText id="name" value="#{studentEdit.student.name}" label="Name">
+
+                </h:inputText>
+
+                <h:outputLabel for="phone" value="Phone" />
+                <h:inputText id="phone" value="#{studentEdit.student.phone}" label="Phone"/>
+
+                
+                <h:inputFile value="#{studentEdit.file}" id="file" label="File" />
+                <h:inputHidden value="#{studentEdit.student.imageurl}"/>
+                
+
+
+
+                <h:commandButton action="#{studentEdit.saveUser()}" value="Submit" />
+                <h:button outcome="index.xhtml" value="Cancel"  />
+            </h:panelGrid>
+            
+            <h:graphicImage value="/img/#{studentEdit.student.imageurl}" alt=""/>
+        </h:form>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Student list</title>
+    </h:head>
+
+
+    <h:body>
+
+        <h:messages />
+
+        <a href="student_edit.xhtml">Add user</a>
+        <h:form>
+            <h:dataTable border="1" var="student" value="#{index.students}">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                        #{student.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Course</f:facet>
+                        #{student.course}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                        #{student.email}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Phone</f:facet>
+                        #{student.phone}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputLabel value="#{student.name}">
+
+                    </h:outputLabel>	   			
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Edit</f:facet>
+                    <h:link outcome="student_edit.xhtml" value="Edit user" includeViewParams="true">
+                        <f:param name="student" value="#{student.id}" />
+                    </h:link>
+
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:link outcome="student_delete.xhtml" value="Delete user">
+                        <f:param name="student" value="#{student.id}" />
+                    </h:link>
+                </h:column>	
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
