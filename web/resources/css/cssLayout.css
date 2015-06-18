@@ -1,0 +1,182 @@
+#page{
+    background-color: #ffffff;
+    margin: 2.5em auto 0 auto;
+    max-width: 1200px;
+    font: 14px Average, Georgia, serif;
+    /*    padding: 2%;*/
+}
+ul {
+	padding-left: 1.4em;
+	list-style: none;
+}
+#header{
+    background-color: #2980b9;
+    width: 100%;
+    height: 100px;
+    padding-top: 10px;
+}
+#content{
+    background-color: #bdc3c7;
+    padding: 20px 10px 20px 20px;
+}
+#nav{
+  background-color: #3498db;
+  padding-right: 15px;
+  padding-left: 0px;
+  font-weight: bold;
+}
+.mainNav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-left: 1px dashed #999999;
+  overflow: hidden;
+}
+.mainNav li {
+  float: left;
+  width: 12em;
+}
+
+.mainNav a {
+  color: #000;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px dashed #999;
+  border-left: none;
+  padding: 7px 5px 7px 30px;
+  display: block;
+  background-color: #E7E7E7;
+  background-image: url(images/nav.png);
+  background-repeat: no-repeat;
+  background-position: 0 2px;
+}
+.mainNav a:hover {
+  font-weight: bold;
+  background-color: #f39c12;
+  text-decoration: none;
+/*  background-position: 3px 50%;*/
+}
+#footer{
+    background-color: #2980b9;
+    width: 100%;
+    height: 100px;
+}
+table.people {
+    width: 100%;
+    border-collapse: collapse;  
+    border-bottom: 1px solid #000;
+}
+
+table.people th,
+table.people td {
+    padding: 5px;
+    text-align: left;
+    font-family: Arial, Verdana, sans-serif;
+    border: 1px solid #000;
+    border-bottom:0;
+}
+table.people th {
+    background-color: #ddd;
+    color: #BB0000;
+    border-bottom: 2px solid #000;
+}
+table.people tr.odd {
+    background-color: #DDFFFF;
+}
+
+table.people tr.odd td {
+    border-top: 1px solid #ccc;
+}
+
+table.people tr.even {
+    background-color: #BBEEEE;
+}
+
+table.people tr.even td {
+    border-top: 1px solid #BBEEEE;
+}
+/*submit input {
+    margin: 5px;
+    padding: 5px 5px 5px 20px; 
+    border: 1px solid #aaa;
+}*/
+.apply {
+    padding: 10px 25px;
+  font-size: 1em;
+  color: white;
+  background:#3498db;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 4px white;
+  margin-top: 10px;
+} 
+.apply:hover{
+background-color: #bdc3c7;
+}
+
+.footer{
+   color: #ffffff;
+   padding-top: 10px;
+   margin-left: 10px;
+}
+h1 {
+	font-size: 2em;
+	font-family: Tahoma, Geneva, sans-serif;
+	color: rgb(255,255,255);
+	font-weight: normal;
+	border-bottom: dotted 2px rgba(255,255,255,.5);
+	padding-bottom: 4px;	
+	margin: 25px 0;
+}
+.register{
+    width: 450px;
+}
+
+.red{
+   background-color: #bdc3c7 !important;
+   background-image:none!important;
+}
+
+.normal{
+   background-color:blue!important;
+   background-image:none!important;
+}
+.first-row {
+     background-color: #f1c40f !important;
+     background-image: none !important;
+     color: #000000 !important;
+}
+                
+.second-row {
+    background-color: #c0392b !important;
+    background-image: none !important;
+    color: #000000 !important;
+}
+
+.form{
+    margin-left: 400px;
+}
+
+.subform input[type="text"],input[type="password"], .subform textarea {
+	font-size: 1.2em;
+	color: #000000;
+	border-radius: 5px;
+	border: none;
+	background-color: rgba(255,255,255,.5);	
+	box-shadow: inset 0 0 10px rgba(255,255,255,.75);
+	width: 200px;
+		
+}
+.subform input[type="text"]:focus, input[type="password"]:focus,.subform textarea:focus {
+  background-color: white;
+  color: black;
+}
+
+.panel{
+    background: #ecf0f1;
+    width: auto;
+   padding: 20px;
+   height: auto;
+   border-radius: 10px;
+}

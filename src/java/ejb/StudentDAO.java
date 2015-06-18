@@ -6,10 +6,14 @@
 package ejb;
 
 import entities.Students;
+import entities.Users;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -46,6 +50,35 @@ public class StudentDAO {
 
     public List<Students> getAll() {
         return entityManager.createNamedQuery("Students.findAll", Students.class).getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+    protected Users findOneResult(String namedQuery, Map<String, Object> parameters) {
+        Users result = null;
+        try {
+            Query query = entityManager.createNamedQuery(namedQuery);
+            // Method that will populate parameters if they are passed not null and empty
+            if (parameters != null && !parameters.isEmpty()) {
+                populateQueryParameters(query, parameters);
+            }
+            result = (Users) query.getSingleResult();
+        } catch (Exception e) {
+            System.out.println("Error while running query: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+ 
+    private void populateQueryParameters(Query query, Map<String, Object> parameters) {
+        for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
+        }
+    }
+    
+    public Users findByUsername(String name) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("name", name);
+        return findOneResult(Users.FIND_BY_EMAIL, parameters);
     }
 
 }

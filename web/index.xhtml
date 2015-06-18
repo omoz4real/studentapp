@@ -2,18 +2,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Student list</title>
+         <h:outputStylesheet library="css" name="cssLayout.css" />
+        <h:outputStylesheet library="css" name="default.css" />
     </h:head>
-
-
     <h:body>
-
+        <ui:composition template="/templates/mainTemplate.xhtml">
+            <ui:define name="navigation">
+                <h:form>
+                    <ul class="mainNav">
+                   <li><h:commandLink action="admin/student_edit?faces-redirect=true" value="Admin" /></li>
+                    <li><h:commandLink action="users/list?faces-redirect=true" value="Users" /></li>
+                    </ul>
+                </h:form>
+            </ui:define>
+       
+            <ui:define name="content">
         <h:messages />
-
-        <a href="student_edit.xhtml">Add user</a>
+        
         <h:form>
             <h:dataTable border="1" var="student" value="#{index.students}">
                 <h:column>
@@ -40,19 +49,21 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Edit</f:facet>
-                    <h:link outcome="student_edit.xhtml" value="Edit user" includeViewParams="true">
+                    <h:link outcome="admin/student_edit.xhtml" value="Edit user" includeViewParams="true">
                         <f:param name="student" value="#{student.id}" />
                     </h:link>
 
                 </h:column>
                 <h:column>
                     <f:facet name="header">Delete</f:facet>
-                    <h:link outcome="student_delete.xhtml" value="Delete user">
+                    <h:link outcome="admin/student_delete.xhtml" value="Delete user">
                         <f:param name="student" value="#{student.id}" />
                     </h:link>
                 </h:column>	
             </h:dataTable>
         </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

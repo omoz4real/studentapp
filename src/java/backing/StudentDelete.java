@@ -34,16 +34,16 @@ public class StudentDelete {
 	
 	public String delete() {
 		studentDAO.delete(students);
-		return "index?faces-redirect=true";
+		return "/index?faces-redirect=true";
 	}
 	
 	public String cancel() {
-		return "index?faces-redirect=true";
+		return "/index?faces-redirect=true";
 	}
 
     public Students getStudents() {
         return students;
-    }
+    } 
 
     public void setStudents(Students students) {
         this.students = students;

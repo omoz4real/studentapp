@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:metadata>
+        <f:viewParam name="student" value="#{studentDelete.students}" >
+            <f:converter converterId="myConverter"/>
+        </f:viewParam>
+    </f:metadata>
+
+    <h:head>
+        <title>Student delete</title>
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+    </h:head>
+
+    <h:body>
+        <ui:composition template="./../templates/mainTemplate.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    Do you want to delete #{studentDelete.students.course} #{studentDelete.students.email}?<br /><br/>
+                    <h:commandButton action="#{studentDelete.delete}" value="Delete" />
+                    <h:commandButton action="#{studentDelete.cancel}" value="Cancel" />
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -5,7 +5,7 @@
  */
 package backing;
 
-import ejb.StudentDAO;
+import ejb.StudentsFacade;
 import entities.Students;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -29,12 +29,15 @@ public class Index {
 
     private List<Students> students;
     private Students student;
-    @EJB
-    private StudentDAO studentDAO;
+    //@EJB
+    //private StudentDAO studentDAO;
+    @EJB 
+    private StudentsFacade studentsFacade;
 
     @PostConstruct
     public void init() {
-        students = studentDAO.getAll();
+        //students = studentDAO.getAll();
+        students = studentsFacade.findAll();
     }
 
     public List<Students> getStudents() {
@@ -80,5 +83,6 @@ public class Index {
 //		studentDAO.delete(student);
 //		return "index?faces-redirect=true";
 //	}
+    
 
 }

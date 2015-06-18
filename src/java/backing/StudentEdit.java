@@ -5,19 +5,23 @@
  */
 package backing;
 
-import ejb.StudentDAO;
+import ejb.StudentsFacade;
+import ejb.UsersFacade;
 import entities.Students;
+import entities.Users;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import static util.Messages.addFlashMessage;
@@ -27,8 +31,8 @@ import static util.Messages.addFlashMessage;
  * @author omosaziegbe
  */
 @Named(value = "studentEdit")
-@ViewScoped
-public class StudentEdit {
+@SessionScoped
+public class StudentEdit implements Serializable {
 
     /**
      * Creates a new instance of StudentEdit
@@ -36,13 +40,12 @@ public class StudentEdit {
     public StudentEdit() {
     }
 
-    
     private Students student;
     private Part file;
     String imageFileName;
 
     @EJB
-    private StudentDAO studentDAO;
+    private StudentsFacade studentsFacade;
 
     public void preRenderView() {
         if (student == null) {
@@ -53,15 +56,17 @@ public class StudentEdit {
     public String saveUser() {
         upload();
         if (student.getId() != null) {
-            //student.setImageurl(imageFileName);
-            studentDAO.update(student);
+            student.setImageurl(imageFileName);
+            studentsFacade.edit(student);
+            //studentDAO.update(student);
         } else {
             student.setImageurl(imageFileName);
-            studentDAO.save(student);
+            studentsFacade.create(student);
+            //studentDAO.save(student);
         }
 
-	addFlashMessage("Student " + student.getId() + " saved");
-        return "index.xhtml?faces-redirect=true";
+        addFlashMessage("Student " + student.getName() + " saved");
+        return "/index.xhtml?faces-redirect=true";
     }
 
     public Students getStudent() {
@@ -112,7 +117,7 @@ public class StudentEdit {
             close(bis);
         }
         imageFileName = getFilename(file);
-        System.out.println("This is the file name " + " " + imageFileName +  " Name is" +student.getName());
+        System.out.println("This is the file name " + " " + imageFileName + " Name is" + student.getName());
     }
 
     private static String getFilename(Part part) {
@@ -135,4 +140,28 @@ public class StudentEdit {
         }
     }
 
+   private Users user;
+    @EJB
+    private UsersFacade usersFacade;
+    public Users getUsers(){
+        if (user == null){
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            String name = context.getUserPrincipal().getName();
+            user = usersFacade.findByUsername(name);
+        }
+    return user;
+    }
+
+    public boolean isUserAdmin() {
+        return getRequest().isUserInRole("admin");
+    }
+
+    public String logOut() {
+        getRequest().getSession().invalidate();
+        return "/index.xhtml?faces-redirect=true";
+    }
+
+    private HttpServletRequest getRequest() {
+        return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+    }
 }

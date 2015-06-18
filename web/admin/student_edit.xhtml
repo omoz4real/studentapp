@@ -13,10 +13,13 @@
     </f:metadata>
     <h:head>
         <title>Student list</title>
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
     </h:head>
 
     <h:body>
-
+  <ui:composition template="./../templates/mainTemplate.xhtml">
+            <ui:define name="content">
         <h:messages />
 
         <h:form enctype="multipart/form-data">
@@ -48,13 +51,20 @@
 
 
 
-                <h:commandButton action="#{studentEdit.saveUser()}" value="Submit" />
-                <h:button outcome="index.xhtml" value="Cancel"  />
+                <h:commandButton action="#{studentEdit.saveUser()}" actionListener="#{reportGenerator.generateReport}" value="Submit" >
+                    <f:param name="name" value="#{studentEdit.student.name}" />
+                    <f:param name="phone" value="#{studentEdit.student.phone}" />
+                    <f:param name="email" value="#{studentEdit.student.email}" />
+                    <f:param name="course" value="#{studentEdit.student.course}" />
+                    <f:param name="imageUrl" value="#{studentEdit.student.imageurl}" />
+                </h:commandButton>
+                <h:button outcome="/index.xhtml" value="Cancel"  />
             </h:panelGrid>
             
             <h:graphicImage value="/img/#{studentEdit.student.imageurl}" alt=""/>
         </h:form>
-
+            </ui:define>
+</ui:composition>
     </h:body>
 </html>
 
